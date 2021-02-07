@@ -1,2 +1,18 @@
 How many tokens are there in the following statement?
 answer=(3*q-p*p)/3;
+
+14 tokens:
+01) answer
+02) =
+03) (
+04) 3
+05) *
+06) q
+07) -
+08) p
+09) *
+10) p
+11) )
+12) /
+13) 3
+14) ;

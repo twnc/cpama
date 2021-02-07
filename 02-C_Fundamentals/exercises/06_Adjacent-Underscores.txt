@@ -1,2 +1,5 @@
 Why is it not a good idea for an identifier to contain more than one
 adjacent underscore (as in current--balance, for example)?
+
+Answer: It isn't visually clear. A double underscore would be easy to 
+        mistake for a single or triple underscore.
