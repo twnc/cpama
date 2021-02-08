@@ -11,7 +11,10 @@
 
 int main(void)
 {
-	float radius = 10.0f;
+	float radius;
+	printf("Please enter the radius of your sphere in meters: ");
+	scanf("%f", &radius);
+
 	float volume = (4.0f/3.0f) * PI * radius * radius * radius;
 
 	printf("A sphere with a radius of %.2f has a volume of %.2f meters cubed.\n", radius, volume);
