@@ -7,4 +7,6 @@ What output do the following calls of printf produce?
 (c) printf(%.4f", 83.162);
 83.1620
 (d) printf("%-6.2g", .0000009979);
-9.9e-07
+1e-06 // Initially gave the wrong answer, and incorrectly assumed printf would 
+      // cut off remaining digits. It actually rounds up floating numbers 
+      // according to requested precision.
