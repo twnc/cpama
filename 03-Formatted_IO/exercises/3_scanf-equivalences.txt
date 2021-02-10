@@ -1,7 +1,7 @@
 For each of the following pairs of scanf format strings, indicate whether or not 
 the two strings are equivalent. If they're not, show how they can be distinguished.
 
-(a) "%d"	versus " %d"
-(b) "%d-%d-%d"	versus "%d -%d -%d"
-(c) "%f"	versus "%f "
-(d) "%f,%f"	versus "%f, %f"
+(a) "%d"	versus " %d"		// Equivalent
+(b) "%d-%d-%d"	versus "%d -%d -%d"	// Not equivalent, scanf doesn't skip whitespace when looking for a specific character. If there is a space before a '-' then the first answer wouldn't find it and exit.
+(c) "%f"	versus "%f "		// Not equivalent, the second will hang if there isn't white space at the end. It also wouldn't leave the white space in the buffer like scanf otherwise would.
+(d) "%f,%f"	versus "%f, %f"		// Equivalent
