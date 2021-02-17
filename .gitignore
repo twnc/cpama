@@ -1,4 +1,5 @@
 exampleCode/
+*.DS_Store
 
 
 # Standard C Gitignore
