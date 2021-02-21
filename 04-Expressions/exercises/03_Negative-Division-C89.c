@@ -23,3 +23,12 @@ int main(void) {
 
 	return 0;
 }
+
+/*
+ * TEST RESULTS
+ * Compiled code with clang and gcc with -std=89 on MacOS and Manjaro Linux on a
+ * Raspberry Pi. Results on all machines and compilers were 1 -1 -1 1 which
+ * matches standardised behaviour for C99 which is interesting. All compilers
+ * accepted C99 style commenting except gcc on Linux which is so I modified the
+ * style for compatibility,
+ */
