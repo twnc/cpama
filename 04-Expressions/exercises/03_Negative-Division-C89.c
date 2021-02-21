@@ -5,15 +5,19 @@
 int main(void) {
 	// (a) 8 / 5
 	printf("%d\n", 8 / 5);
+	// Answer: 1
 
 	// (b) -8 / 5
 	printf("%d\n", -8 / 5);
+	// Answer: -1 or -2 (implementation dependent)
 
 	// (c) 8 / -5
 	printf("%d\n", 8 / -5);
+	// Answer: -1 or -2 (implementation dependent)
 
 	// (d) -8 / -5
 	printf("%d\n", -8 / -5);
+	// Answer: 1 or 2 (implementation dependent)
 
 	return 0;
 }
