@@ -21,3 +21,7 @@ int main(void) {
 
 	return 0;
 }
+
+// TEST RESULTS:
+// Compiled on MacOS and Linux with gcc and clang with -std=c99 -pedantic and
+// all compiled fine and all gave the same results: 1 -1 -1 1
