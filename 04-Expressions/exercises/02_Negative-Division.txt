@@ -1,2 +1,10 @@
 If i and j are positive integers, does (-i)/j always have the same values
 as -(i/j)? Justify your answer.
+
+In C99 (-i)/j always has the same values as -(i/j) as any remainder always
+truncates towards 0. That way -3/2 would end up rounding towards zero just as
+-(3/2) would.
+
+In C89 it is slightly more complicated. In the C89 standard, it is stated
+that if either operand is negative, it can be truncated in either direciton.
+This makes it somewhat unpredictable as it is implementation defined behaviour.
