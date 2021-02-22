@@ -6,3 +6,21 @@
 //
 // The output should be displayed using five digits, even if few digits are
 // sufficient. Hint: ADD LATER
+
+#include<stdio.h>
+
+int main(void)
+{
+	int decimal_number, octal_number;
+
+	printf("Enter a number between 0 and 32767: ");
+	scanf("%d", &decimal_number);
+	octal_number =  (decimal_number/1         % 8 * 1);
+	octal_number += (decimal_number/8         % 8 * 10);
+	octal_number += (decimal_number/(8*8)     % 8 * 100);
+	octal_number += (decimal_number/(8*8*8)   % 8 * 1000);
+	octal_number += (decimal_number/(8*8*8*8) % 8 * 10000);
+	printf("In octal, your number is: %.5d\n", octal_number);
+
+	return 0;
+}
