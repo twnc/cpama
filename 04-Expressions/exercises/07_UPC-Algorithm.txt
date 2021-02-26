@@ -10,3 +10,35 @@ Compute the remainder when the total is divided by 10.
 Subtract the remainder from 10.
 
 Why doesn't this technique work?
+
+ANSWER:
+If you write them out as one line of code it becomes slightly clearer.
+9 - ((total - 1) % 10)
+10 - (total % 10)
+
+It works perfectly without the modulo function:
+9 - (total - 1)
+evaluates to:
+9 - total + 1
+which simplifies to:
+10 - total
+So it makes sense to skip to the final step to save unnecessary calculations and
+to make the code more readable. But as the modulo function is included, it only
+works if the result of x % y decreases by 1 every time you decrease x by 1.
+
+And most of the time it does. 3 % 10 = 3, 2 % 10 = 2, etc. If the results
+scale linearly then you can subtract one later to simplify the equation. But
+there is an exception to this, when x is a multiple of y, the modulo operation
+returns 0. If you subtract one from x, you don't get 0 but y - 1. This means you
+can't try and account for it later by subracting one after the modulo function
+as occurs as it would have changed the result of the modulo operation.
+
+So as long as the total isn't a multiple of 10 it works fine:
+total = 9
+Method 1: 9 - ((total - 1) % 10) = 9 - ((9 - 1) % 10) = 9 - (8 % 10) = 9 - 8 = 1
+Method 2: 10 - (total % 10) = 10 - (9 % 10) = 10 - 9 = 1
+But as soon as total is a multiple of 10, defering the subtraction changes the
+result:
+total = 10
+Method 1: 9 - ((total - 1) % 10) = 9 - ((10 - 1)% 10) = 9 - (9 % 10) = 9 - 9 = 0
+Method 2: 10 - (total % 10) = 10 - (10 % 10) = 10 - 0 = 10
