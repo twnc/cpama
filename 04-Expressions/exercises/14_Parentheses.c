@@ -10,25 +10,25 @@ int main(void)
 
 	// (a) a * b - c * d + e
 	no_parentheses =   a * b - c * d + e;
-	with_parentheses = 0;
+	with_parentheses = (((a * b) - (c * d)) + e);
 	if(no_parentheses == with_parentheses)
 		printf("(a) is correct!\n");
 
 	// (b) a / b % c / d
 	no_parentheses =   a / b % c / d;
-	with_parentheses = 0;
+	with_parentheses = (((a / b) % c) / d);
 	if(no_parentheses == with_parentheses)
 		printf("(b) is correct!\n");
 
 	// (c) - a - b + c - + d
 	no_parentheses =   - a - b + c - + d;
-	with_parentheses = 0;
+	with_parentheses = ((((- a) - b) + c) - (+ d));
 	if(no_parentheses == with_parentheses)
 		printf("(c) is correct!\n");
 
 	// (d) a * - b / c - d
 	no_parentheses =   a * - b / c - d;
-	with_parentheses = 0;
+	with_parentheses = (((a * (- b)) / c) - d);
 	if(no_parentheses == with_parentheses)
 		printf("(d) is correct!\n");
 
