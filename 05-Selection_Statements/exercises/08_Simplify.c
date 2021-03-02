@@ -10,13 +10,7 @@ int main(void)
 	int age = 28;
 	bool teenager;
 
-	if (age >= 13)
-		if (age <= 19)
-			teenager = true;
-		else
-			teenager = false;
-	else if (age < 13)
-		teenager = false;
+	teenager = (age >= 13 && age <= 19);
 
 	printf("Age: %d\nTeenager: %d\n", age, teenager);
 
