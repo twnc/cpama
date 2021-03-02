@@ -30,7 +30,7 @@ int main(void)
 	i = 1; j = 1; k = 1;
 	printf("%d ", ++i || ++j && ++k);
 	printf("%d %d %d\n", i, j, k);
-	// Answer: 1 2 1 2
+	// Answer: 1 2 1 1
 
 	return 0;
 }
