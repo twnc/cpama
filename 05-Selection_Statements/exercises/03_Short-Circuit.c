@@ -12,21 +12,25 @@ int main(void)
 	i = 3; j = 4; k = 5;
 	printf("%d ", i < j || ++j < k);
 	printf("%d %d %d\n", i, j, k);
+	// Answer: 1 3 4 5
 
 	// (b)
 	i = 7; j = 8; k = 9;
 	printf("%d ", i - 7 && j++ < k);
 	printf("%d %d %d\n", i, j, k);
+	// Answer: 0 7 8 9
 
 	// (c)
 	i = 7; j = 8; k = 9;
 	printf("%d ", (i = j) || (j = k));
 	printf("%d %d %d\n", i, j, k);
+	// Answer: 1 8 8 9
 
 	// (d)
 	i = 1; j = 1; k = 1;
 	printf("%d ", ++i || ++j && ++k);
 	printf("%d %d %d\n", i, j, k);
+	// Answer: 1 2 1 2
 
 	return 0;
 }
