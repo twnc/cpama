@@ -1,4 +1,10 @@
 // Are the following if statements equivalent? If not, why not?
+//
+// ANSWER: Yes they are equivalent, at least in terms of output. Depending on how
+// the scores are distributed however, one might be faster. For a score of 93 for
+// example, the first statement would solve it with just one if evaluation,
+// whereas in the second it would require all four. For a score of 53, it would
+// be the other way around. 
 
 #include<stdio.h>
 #include<stdlib.h>
