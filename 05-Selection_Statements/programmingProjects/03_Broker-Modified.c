@@ -11,20 +11,25 @@
 // Enter value of trade: 30000
 // Commission: $166.00
 // NEW:
-// Enter the number of share you would like to purchase: 3000
+// Enter the number of shares you would like to purchase: 3000
 // Enter the price per share: 10
-// Commission: $166
-// Rival's commission: $93
+// Commission: $166.00
+// Rival's commission: $93.00
 
 #include<stdio.h>
 
 int main(void)
 {
-	float commission, value;
+	float commission, value, price_per_share, rival_commission;
+	int number_of_shares;
 
-	printf("Enter value of trade: ");
-	scanf("%f", &value);
+	printf("Enter the number of shares you would like to purchase: ");
+	scanf("%d", &number_of_shares);
+	printf("Enter the price per share: ");
+	scanf("%f", &price_per_share);
+	value = price_per_share * number_of_shares;
 
+	// Calculate commission
 	if(value < 2500.00f)
 		commission = 30.00f + value * .017f;
 	else if (value < 6250.00f)
@@ -41,7 +46,14 @@ int main(void)
 	if (commission < 39.00f)
 		commission = 39.00f;
 
-	printf("Commission: $%.2f\n", commission);
+	// Calculate rival's commission
+	if(number_of_shares < 2000)
+		rival_commission = 33.00f + 0.03f * number_of_shares;
+	else
+		rival_commission = 33.00f + 0.02f * number_of_shares;
+
+	printf("Commission:\t\t$%.2f\n", commission);
+	printf("Rival's commission:\t$%.2f\n", rival_commission);
 
 	return 0;
 }
