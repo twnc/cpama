@@ -1,5 +1,6 @@
 // What output does the following program fragment produce? (Assume that i is an
 // integer variable.)
+// Answer: onetwo
 
 #include<stdio.h>
 
