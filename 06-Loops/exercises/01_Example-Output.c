@@ -1,4 +1,5 @@
 // What output does the following program produce?
+// Answer: 1 2 4 8 16 32 64 128
 
 #include<stdio.h>
 
