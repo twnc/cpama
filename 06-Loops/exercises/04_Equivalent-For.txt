@@ -1,0 +1,10 @@
+Which one of the following statements is not equivalent to the other two
+(assuming that the loop bodies are the same)?
+(a) for (i = 0; i < 10; i++) ...
+(b) for (i = 0; i < 10; ++i) ...
+(c) for (i = 0; i++ < 10; ) ...
+
+(c) is the odd one out. (c) is almost the same. It would give the same results
+if the loop body doesn't make any reference to i. But in (c), i is incremented
+before the loop body is carried out, whereas in the other two i is incremented
+afterwards.
