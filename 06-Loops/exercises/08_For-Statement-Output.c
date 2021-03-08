@@ -1,4 +1,5 @@
 // What output does the following for statement produce?
+// ANSWER: 10 5 3 2 1 1 1 1 (repeating forever)
 
 #include<stdio.h>
 
