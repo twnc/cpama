@@ -4,11 +4,8 @@
 
 int main(void)
 {
-	int i = 9384;
-	do {
+	for(int i = 9384; i > 0; i /= 10)
 		printf("%d ", i);
-		i /= 10;
-	} while (i > 0);
 	printf("\n");
 
 	return 0;
