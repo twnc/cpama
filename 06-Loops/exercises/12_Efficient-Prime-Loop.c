@@ -14,11 +14,11 @@ int main(void)
 {
 	int d, n = 104729;
 
-	for (d = 2; d < n; d++)
+	for (d = 2; (d*d) < n; d++)
 		if (n % d == 0)
 			break;
 
-	if (n != d)
+	if (n % d == 0)
 		printf("%d is not a prime. %d divides by %d.\n", n, n, d);
 	else
 		printf("%d is a prime number.\n", n);
