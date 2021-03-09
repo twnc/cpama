@@ -13,3 +13,21 @@
 // The largest number entered was 100.62
 //
 // Notice that the numbers aren't necessarily integers.
+
+#include<stdio.h>
+
+int main(void)
+{
+	float temp, biggest = 0;
+
+	do {
+		printf("Enter a number: ");
+		scanf("%f", &temp);
+		if(temp > biggest)
+			biggest = temp;
+	} while (temp > 0);
+
+	printf("\nThe largest number entered was %.2f\n", biggest);
+
+	return 0;
+}
