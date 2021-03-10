@@ -18,18 +18,14 @@ int main(void)
 	printf("Enter two integers: ");
 	scanf("%d%d", &int1, &int2);
 
-	// Sort int1 and int2
-	if(int1 > int2) {
-		temp = int1;
-		int1 = int2;
-		int2 = temp;
+	// Euclid's algorithm
+	int m = int1, n = int2;
+	while(n != 0) {
+		temp =  m % n;
+		m = n;
+		n = temp;
 	}
-
-	// Find greatest common divisor
-	for(int i = 2; i <= int1; ++i) {
-		if(int1 % i == 0 && int2 % i == 0)
-			greatest_common_divisor = i;
-	}
+	greatest_common_divisor = m;
 
 	printf("Greatest common divisor: %d\n", greatest_common_divisor);
 
