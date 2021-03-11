@@ -38,11 +38,11 @@ int main(void)
 	annual_interest_rate = 1.0f + (annual_interest_rate / 100.0f);
 
 	loan = loan * monthly_interest_rate - monthly_payment;
-	printf("Balance reamining after first payment: $%.2f\n", loan);
+	printf("Balance remaining after first payment: $%.2f\n", loan);
 	loan = loan * monthly_interest_rate - monthly_payment;
-	printf("Balance reamining after second payment: $%.2f\n", loan);
+	printf("Balance remaining after second payment: $%.2f\n", loan);
 	loan = loan * monthly_interest_rate - monthly_payment;
-	printf("Balance reamining after third payment: $%.2f\n", loan);
+	printf("Balance remaining after third payment: $%.2f\n", loan);
 
 
 	return 0;
