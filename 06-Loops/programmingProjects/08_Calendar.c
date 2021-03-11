@@ -10,31 +10,31 @@
 // 20 21 22 23 24 25 26
 // 27 28 29 30 31
 //
-// Hint: Add later, try without first
+// Hint: This program isn't as hard as it looks. The most important part is a
+// for statement that uses a variable i to count from 1 to n, where n is the
+// number of days in the month, printing each value of i. Inside the loop, an if
+// statement test whether i is the last day in a week; if so, it prints a
+// new-line character.
 
 #include<stdio.h>
 
 int main(void)
 {
-	int days_in_month, starting_weekday;
+	int days_in_month, weekday;
 	printf("Enter number of days in month: ");
 	scanf("%d", &days_in_month);
 	printf("Enter starting day of the week (1=Sun, 7=Sat): ");
-	scanf("%d", &starting_weekday);
+	scanf("%d", &weekday);
 
+	for(int i = 1; i < weekday; i++)
+		printf("   ");
 
-	starting_weekday--;
-	for(int i = 1; i <= days_in_month + starting_weekday; i++) {
-		if(i <= starting_weekday)
-			printf("   ");
-		else {
-			printf("%2d", i-starting_weekday);
-
-			if(i%7 == 0)
-				printf("\n");
-			else
-				printf(" ");
-		}
+	for(int date = 1; date <= days_in_month; date++, weekday++) {
+		printf("%2d", date);
+		if(weekday % 7 == 0)
+			printf("\n");
+		else
+			printf(" ");
 	}
 	printf("\n");
 
