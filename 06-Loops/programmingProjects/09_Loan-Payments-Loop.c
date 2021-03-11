@@ -6,7 +6,7 @@
 //
 // ORIGINAL:
 // Write a program that calculates the remaining balance on a loan after the first,
-// second. and third monthly payments:
+// second, and third monthly payments:
 //
 // Enter amount of loan: 20000.00
 // Enter interest rate: 6.0
@@ -26,23 +26,24 @@
 int main(void)
 {
 	float loan, annual_interest_rate, monthly_payment, monthly_interest_rate;
+	int shown_payments;
 	printf("Enter amount of loan: ");
 	scanf("%f", &loan);
 	printf("Enter interest rate: ");
 	scanf("%f", &annual_interest_rate);
 	printf("Enter monthly payment: ");
 	scanf("%f", &monthly_payment);
+	printf("Enter number of payments to be shown: ");
+	scanf("%d", &shown_payments);
 	printf("\n");
 
 	monthly_interest_rate = 1.0f + (annual_interest_rate / 12.0f / 100.0f);
 	annual_interest_rate = 1.0f + (annual_interest_rate / 100.0f);
 
-	loan = loan * monthly_interest_rate - monthly_payment;
-	printf("Balance remaining after first payment: $%.2f\n", loan);
-	loan = loan * monthly_interest_rate - monthly_payment;
-	printf("Balance remaining after second payment: $%.2f\n", loan);
-	loan = loan * monthly_interest_rate - monthly_payment;
-	printf("Balance remaining after third payment: $%.2f\n", loan);
+	for(int i = 1; i <= shown_payments; i++) {
+		loan = loan * monthly_interest_rate - monthly_payment;
+		printf("Balance remaining after payment %d: $%.2f\n", i, loan);
+	}
 
 
 	return 0;
