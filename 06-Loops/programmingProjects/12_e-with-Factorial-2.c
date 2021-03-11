@@ -13,20 +13,19 @@
 
 int main(void)
 {
-	float e = 1, factorial = 1;
-	int iterations;
+	float e = 1, factorial = 1, minimum_increase, increase;
 
 	printf("The value of the constant of the mathematical constant e can ");
 	printf("be expressed as an infinite series:\n");
 	printf("e = 1 + 1/1! + 1/2! + 1/3! + ...\n");
 	printf("We can aproximate the value of e by computing the value of \n");
 	printf("1 + 1/1! + 1/2! + 1/3! + ... 1/n!\n");
-	printf("What would you like n to be?\n");
-	scanf("%d", &iterations);
+	printf("We will keep calculating until 1/n! is really small. ");
+	printf("How small shall we make the minimum increase?\n");
+	scanf("%f", &minimum_increase);
 
-	for(int i = 1; i <= iterations; i++) {
-		factorial *= i;
-		e += 1 / factorial;
+	for (int i = 1; (increase = 1 / (factorial *= i)) >= minimum_increase; i++) {
+		e += increase;
 	}
 
 	printf("\ne = %f\n", e);
