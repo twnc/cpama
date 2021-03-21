@@ -14,13 +14,39 @@
 int main(void)
 {
 	int num1, denom1, num2, denom2, result_num, result_denom;
+	char frac_operator;
 
-	printf("Enter two fractions separated by a plus sign: ");
-	scanf("%d /%d +%d /%d", &num1, &denom1, &num2, &denom2);
+	printf("Enter two fractions separated by an operator: ");
+	scanf("%d /%d %c%d /%d", &num1, &denom1, &frac_operator, &num2, &denom2);
 
-	result_num = num1 * denom2 + num2 * denom1;
+	// Ensure valid operator
+	while(frac_operator != '+' && frac_operator != '-' && frac_operator != '*' && frac_operator != '/') {
+		printf("'%c' is not a valid operator. Please enter either +, -, * or / :", frac_operator);
+		scanf("%c", &frac_operator);
+	}
+	
+	// Give fractions the same denominator
 	result_denom = denom1 * denom2;
-	printf("The sum is %d/%d\n", result_num, result_denom);
+	num1 *= denom2;
+	num2 *= denom1;
+
+	// Apply user speicified operator
+	switch (frac_operator) {
+		case '+':
+			result_num = num1 + num2;
+			break;
+		case '-':
+			result_num = num1 - num2;
+			break;
+		case '*':
+			result_num = num1 * num2;
+			break;
+		case '/':
+			result_num = num1 / num2;
+			break;
+	}
+
+	printf("The result is %d/%d\n", result_num, result_denom);
 
 	return 0;
 }
