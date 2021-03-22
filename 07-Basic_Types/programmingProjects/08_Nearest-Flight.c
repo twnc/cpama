@@ -43,10 +43,12 @@
 
 #include<stdio.h>
 #include<stdbool.h>
+#include<ctype.h>
 
 int main(void)
 {
 	int user_time, user_hour, user_minutes, closest_time;
+	char am_pm;
 
 	const int dep1 = 8 * 60;
 	const int dep2 = 9 * 60 + 43;
@@ -57,8 +59,10 @@ int main(void)
 	const int dep7 = 19 * 60;
 	const int dep8 = 21 * 60 + 45;
 
-	printf("Enter a 24-hour time: ");
-	scanf("%d :%d", &user_hour, &user_minutes);
+	printf("Enter a 12-hour time: ");
+	scanf("%d :%d %c", &user_hour, &user_minutes, &am_pm);
+	if(toupper(am_pm) == 'P')
+		user_hour += 12;
 	user_time = user_hour * 60 + user_minutes;
 
 	if(user_time < dep1)
