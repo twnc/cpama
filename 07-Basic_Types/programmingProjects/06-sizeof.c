@@ -5,13 +5,13 @@
 
 int main(void)
 {
-	printf("sizeof(short) = %zd\n", sizeof(short));
-	printf("sizeof(int) = %zd\n", sizeof(int));
-	printf("sizeof(long) = %zd\n", sizeof(long));
+	printf("sizeof(short) = %zu\n", sizeof(short));
+	printf("sizeof(int) = %zu\n", sizeof(int));
+	printf("sizeof(long) = %zu\n", sizeof(long));
 	printf("\n");
-	printf("sizeof(float) = %zd\n", sizeof(float));
-	printf("sizeof(double) = %zd\n", sizeof(double));
-	printf("sizeof(long double) = %zd\n", sizeof(long double));
+	printf("sizeof(float) = %zu\n", sizeof(float));
+	printf("sizeof(double) = %zu\n", sizeof(double));
+	printf("sizeof(long double) = %zu\n", sizeof(long double));
 
 	return 0;
 }
