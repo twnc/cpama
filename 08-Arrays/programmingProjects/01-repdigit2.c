@@ -11,7 +11,8 @@
 
 int main(void)
 {
-	bool digit_seen[10] = {false};
+	int digit_seen[10] = {0};
+	bool repeated_digits = false;
 	int digit;
 	long n;
 
@@ -21,14 +22,18 @@ int main(void)
 
 	while (n > 0) {
 		digit = n % 10;
-		if (digit_seen[digit])
-			break;
-		digit_seen[digit] = true;
+		if(++digit_seen[digit] > 1)
+			repeated_digits = true;
 		n /= 10;
 	}
 
-	if (n > 0)
-		printf("Repeated digit\n");
+	if (repeated_digits) {
+		printf("Repeated digit(s):");
+		for (int i = 0; i < sizeof(digit_seen)/sizeof(digit_seen[0]); ++i)
+			if (digit_seen[i] > 1)
+				printf(" %d", i);
+		printf("\n");
+	}
 	else
 		printf("No repeated digits\n");
 
