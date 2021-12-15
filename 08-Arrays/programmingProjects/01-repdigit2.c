@@ -33,8 +33,7 @@ int main(void)
 			if (digit_seen[i] > 1)
 				printf(" %d", i);
 		printf("\n");
-	}
-	else
+	} else
 		printf("No repeated digits\n");
 
 	return 0;
