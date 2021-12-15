@@ -31,20 +31,26 @@ int main(void)
 	scanf("%ld", &n);
 
 	while (n > 0) {
-		digit = n % 10;
-		++digit_seen[digit];
-		n /= 10;
+		while (n > 0) {
+			digit = n % 10;
+			++digit_seen[digit];
+			n /= 10;
+		}
+
+		printf("Digit:\t\t");
+		for (int i = 0; i < 10; ++i)
+			printf("%3d", i);
+		printf("\n");
+
+		printf("Occurences:\t");
+		for (int i = 0; i < 10; ++i)
+			printf("%3d", digit_seen[i]);
+		printf("\n");
+
+		printf("Enter a number: ");
+		fflush(stdout);
+		scanf("%ld", &n);
 	}
-
-	printf("Digit:\t\t");
-	for (int i = 0; i < 10; ++i)
-		printf("%3d", i);
-	printf("\n");
-
-	printf("Occurences:\t");
-	for (int i = 0; i < 10; ++i)
-		printf("%3d", digit_seen[i]);
-	printf("\n");
 
 	return 0;
 }
