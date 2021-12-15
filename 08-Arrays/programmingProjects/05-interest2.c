@@ -41,8 +41,10 @@ int main(void)
 	for (year = 1; year <= num_years; ++year) {
 		printf("%3d\t", year);
 		for (i = 0; i < 5; ++i) {
-			value[i] *= (100 + low_rate + i)/100.00;
-			printf("%.2f\t", value[i]);
+			for(int j = 0; j < 12; ++j) {
+				value[i] *= (100 + low_rate + i)/100.00;
+			}
+			printf("%7.2f\t", value[i]);
 		}
 		printf("\n");
 	}
