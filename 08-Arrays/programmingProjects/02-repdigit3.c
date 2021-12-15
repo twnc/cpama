@@ -17,7 +17,6 @@
 int main(void)
 {
 	int digit_seen[10] = {0};
-	bool repeated_digits = false;
 	int digit;
 	long n;
 
@@ -27,19 +26,19 @@ int main(void)
 
 	while (n > 0) {
 		digit = n % 10;
-		if(++digit_seen[digit] > 1)
-			repeated_digits = true;
+		++digit_seen[digit];
 		n /= 10;
 	}
 
-	if (repeated_digits) {
-		printf("Repeated digit(s):");
-		for (int i = 0; i < sizeof(digit_seen)/sizeof(digit_seen[0]); ++i)
-			if (digit_seen[i] > 1)
-				printf(" %d", i);
-		printf("\n");
-	} else
-		printf("No repeated digits\n");
+	printf("Digit:\t\t");
+	for(int i = 0; i < 10; ++i)
+		printf("%3d", i);
+	printf("\n");
+
+	printf("Occurences:\t");
+	for(int i = 0; i < 10; ++i)
+		printf("%3d", digit_seen[i]);
+	printf("\n");
 
 	return 0;
 }
