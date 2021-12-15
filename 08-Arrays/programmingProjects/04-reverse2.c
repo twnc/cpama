@@ -8,6 +8,7 @@
 #include<stdio.h>
 
 #define N 10
+#define SIZE ((int) (sizeof(array)/sizeof(array[0])))
 
 int main(void)
 {
@@ -15,11 +16,11 @@ int main(void)
 
 	printf("Enter %d numbers: ", N);
 	fflush(stdout);
-	for (i = 0; i < N; ++i)
+	for (i = 0; i < SIZE; ++i)
 		scanf("%d", &array[i]);
 
 	printf("In reverse order:");
-	for (i = N - 1; i >= 0; --i)
+	for (i = SIZE - 1; i >= 0; --i)
 		printf(" %d", array[i]);
 	printf("\n");
 
