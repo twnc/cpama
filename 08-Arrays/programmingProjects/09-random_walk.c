@@ -20,30 +20,95 @@
 #include<time.h>
 #include<stdbool.h>
 
-#define N 10
+#define HEIGHT 10
+#define WIDTH 10
+
+#define MAX_X (WIDTH - 1)
+#define MIN_X 0
+#define MAX_Y (HEIGHT - 1)
+#define MIN_Y 0
+
+#define UP 0
+#define DOWN 1
+#define LEFT 2
+#define RIGHT 3
+
+#define UNOCCUPIED '.'
 
 int main(void)
 {
 	// Initialise matrix
-	char matrix[N][N];
-	for (int i = 0; i < N; ++i) {
-		for (int j = 0; j < N; ++j)
-			matrix[i][j] = '.';
+	char matrix[HEIGHT][WIDTH];
+	for (int i = 0; i < HEIGHT; ++i) {
+		for (int j = 0; j < WIDTH; ++j)
+			matrix[i][j] = UNOCCUPIED;
 	}
 
 	// Seed random function
 	srand((unsigned) time(NULL));
 
+	// Snake randomly through matrix
 	int x, y;
 	x = y = 0;
-	for (char ch= 'A'; ch <= 'Z'; ++ch) {
+	int direction;
+	bool surrounded = false;
+	matrix[y][x] = 'A';
+	for (char ch= 'B'; ch <= 'Z' && !surrounded; ++ch) {
+		//Attain random direction
+		direction = rand() % 4;
+		// Move in direction, reverse if out of bounds or occupied
+		switch (direction) {
+			case UP:
+				++y;
+				if ((y > MAX_Y) | (matrix[y][x] != UNOCCUPIED)) {
+					--y;
+					--ch;
+				}
+				break;
+			case DOWN:
+				--y;
+				if ((y < MIN_Y) | (matrix[y][x] != UNOCCUPIED)) {
+					++y;
+					--ch;
+				};
+				break;
+			case LEFT:
+				--x;
+				if ((x < MIN_X) | (matrix[y][x] != UNOCCUPIED)) {
+					++x;
+					--ch;
+				}
+				break;
+			case RIGHT:
+				++x;
+				if ((x > MAX_X) | (matrix[y][x] != UNOCCUPIED)) {
+					--x;
+					--ch;
+				}
+				break;
+		}
+		matrix[y][x] = ch;
+
+		// Check if surrounded (either out of bounds, or occupied spot)
+		int blocked_sides = 0;
+		if ((y+1 > MAX_Y) | (matrix[y+1][x] != UNOCCUPIED)) // Check up
+			++blocked_sides;
+		if ((y-1 < MIN_Y) | (matrix[y-1][x] != UNOCCUPIED)) // Check down
+			++blocked_sides;
+		if ((x-1 < MIN_X) | (matrix[y][x-1] != UNOCCUPIED)) // Check left
+			++blocked_sides;
+		if ((x+1 > MAX_X) | (matrix[y][x+1] != UNOCCUPIED)) // Check right
+			++blocked_sides;
+		if (blocked_sides == 4) {
+			surrounded = true;
+		}
 
 	}
 
 	// Print matrix
-	for (int i = 0; i < N; ++i) {
+	for (int i = 0; i < HEIGHT; ++i) {
 		printf("%c", matrix[i][0]);
-		for (int j = 1; j < N; ++j)
+		for (int j = 1; j < WIDTH; ++j)
 			printf(" %c", matrix[i][j]);
 		printf("\n");
 	}
