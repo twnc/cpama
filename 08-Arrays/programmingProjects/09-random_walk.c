@@ -50,59 +50,44 @@ int main(void)
 	// Snake randomly through matrix
 	int x, y;
 	x = y = 0;
-	int direction;
-	bool surrounded = false;
 	matrix[y][x] = 'A';
-	for (char ch= 'B'; ch <= 'Z' && !surrounded; ++ch) {
-		//Attain random direction
-		direction = rand() % 4;
-		// Move in direction, reverse if out of bounds or occupied
+	for (char ch= 'B'; ch <= 'Z'; ++ch) {
+		int valid_directions[4] = {-1,-1,-1,-1};
+
+		// Check which directions are available
+		int free_sides = 0;
+		if ((y+1 <= MAX_Y) && (matrix[y+1][x] == UNOCCUPIED)) // Check up
+			valid_directions[free_sides++] = UP;
+		if ((y-1 >= MIN_Y) && (matrix[y-1][x] == UNOCCUPIED)) // Check down
+			valid_directions[free_sides++] = DOWN;
+		if ((x-1 >= MIN_X) && (matrix[y][x-1] == UNOCCUPIED)) // Check left
+			valid_directions[free_sides++] = LEFT;
+		if ((x+1 <= MAX_X) && (matrix[y][x+1] == UNOCCUPIED)) // Check right
+			valid_directions[free_sides++] = RIGHT;
+
+		// End loop if surrounded
+		if (free_sides == 0)
+			break;
+
+		// Generate random valid direction
+		int direction = valid_directions[rand() % free_sides];
+
+		// Move in direction
 		switch (direction) {
 			case UP:
 				++y;
-				if ((y > MAX_Y) | (matrix[y][x] != UNOCCUPIED)) {
-					--y;
-					--ch;
-				}
 				break;
 			case DOWN:
 				--y;
-				if ((y < MIN_Y) | (matrix[y][x] != UNOCCUPIED)) {
-					++y;
-					--ch;
-				};
 				break;
 			case LEFT:
 				--x;
-				if ((x < MIN_X) | (matrix[y][x] != UNOCCUPIED)) {
-					++x;
-					--ch;
-				}
 				break;
 			case RIGHT:
 				++x;
-				if ((x > MAX_X) | (matrix[y][x] != UNOCCUPIED)) {
-					--x;
-					--ch;
-				}
 				break;
 		}
 		matrix[y][x] = ch;
-
-		// Check if surrounded (either out of bounds, or occupied spot)
-		int blocked_sides = 0;
-		if ((y+1 > MAX_Y) | (matrix[y+1][x] != UNOCCUPIED)) // Check up
-			++blocked_sides;
-		if ((y-1 < MIN_Y) | (matrix[y-1][x] != UNOCCUPIED)) // Check down
-			++blocked_sides;
-		if ((x-1 < MIN_X) | (matrix[y][x-1] != UNOCCUPIED)) // Check left
-			++blocked_sides;
-		if ((x+1 > MAX_X) | (matrix[y][x+1] != UNOCCUPIED)) // Check right
-			++blocked_sides;
-		if (blocked_sides == 4) {
-			surrounded = true;
-		}
-
 	}
 
 	// Print matrix
