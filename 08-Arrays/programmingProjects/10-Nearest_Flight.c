@@ -30,84 +30,58 @@
 // closer to 12:47 p.m. (767 minutes since midnight) than to any of the other
 // departure times.
 
+#define SIZE ((int) (sizeof(departures)/sizeof(departures[0])))
+#define FLIGHTS 8
+
 #include<stdio.h>
 #include<stdbool.h>
+
+void printTime(int time)
+{
+	int hours = time / 60;
+	int minutes = time % 60;
+	bool pm = hours > 11;
+	if (hours > 12)
+		hours %= 12;
+	printf("%d:%.2d ", hours, minutes);
+	if (pm)
+		printf("p.m.");
+	else
+		printf("a.m.");
+	return;
+}
 
 int main(void)
 {
 	int user_time, user_hour, user_minutes, closest_time;
 
-	const int dep1 = 8 * 60;
-	const int dep2 = 9 * 60 + 43;
-	const int dep3 = 11 * 60 + 19;
-	const int dep4 = 12 * 60 + 47;
-	const int dep5 = 14 * 60;
-	const int dep6 = 15 * 60 + 45;
-	const int dep7 = 19 * 60;
-	const int dep8 = 21 * 60 + 45;
+	// Arrays of departure times and their corresponding arrival times
+	const int departures[FLIGHTS] = {8 * 60, 9 * 60 + 43, 11 * 60 + 19,
+		12 * 60 + 47, 14 * 60, 15 * 60 + 45, 19 * 60, 21 * 60 + 45};
+	const int arrivals[FLIGHTS] = {10 * 60 + 16, 11 * 60 + 52, 13 * 60 + 31,
+		15 * 60, 16 * 60 + 8, 17 * 60 + 55, 21 * 60 + 20, 23 * 60 + 58};
 
+	// Take user input
 	printf("Enter a 24-hour time: ");
+	fflush(stdout);
 	scanf("%d :%d", &user_hour, &user_minutes);
 	user_time = user_hour * 60 + user_minutes;
 
-	if(user_time < dep1)
-		closest_time = dep1;
-	else if (user_time > dep8)
-		closest_time = dep8;
-	else {
-		int time_below;
-		int time_above;
-
-		if(user_time < dep2) {
-			time_below = dep1;
-			time_above = dep2;
-		} else if(user_time < dep3) {
-			time_below = dep2;
-			time_above = dep3;
-		} else if (user_time < dep4) {
-			time_below = dep3;
-			time_above = dep4;
-		} else if (user_time < dep5) {
-			time_below = dep4;
-			time_above = dep5;
-		} else if (user_time < dep6) {
-			time_below = dep5;
-			time_above = dep6;
-		} else if (user_time < dep7) {
-			time_below = dep6;
-			time_above = dep7;
-		} else {
-			time_below = dep7;
-			time_above = dep8;
-		}
-
-		if(user_time - time_below < time_above - user_time)
-			closest_time = time_below;
-		else
-			closest_time = time_above;
+	// Find closest departure time
+	for (int i = 0; i < SIZE - 1; ++i) {
+		if ((user_time - departures[i]) < (departures[i+1] - user_time)) {
+			closest_time = i;
+			break;
+		} else
+			closest_time = i + 1;
 	}
 
-	int closest_hour = closest_time / 60;
-	int closest_minute = closest_time % 60;
-	bool pm = closest_hour > 11;
-	if(closest_hour > 12)
-		closest_hour %= 12;
-
-	printf("Closest departure time is %d:%.2d ", closest_hour, closest_minute);
-	if(pm) printf("p.m., arriving at ");
-	else printf("a.m., arriving at ");
-
-	switch(closest_time) {
-		case dep1: printf("10:16 a.m.\n"); break;
-		case dep2: printf("11:52 a.m.\n"); break;
-		case dep3: printf("1:31 p.m.\n"); break;
-		case dep4: printf("3:00 p.m.\n"); break;
-		case dep5: printf("4:08 p.m.\n"); break;
-		case dep6: printf("5:55 p.m.\n"); break;
-		case dep7: printf("9:20 p.m.\n"); break;
-		case dep8: printf("11:58 p.m.\n"); break;
-		default: printf("ERROR\n"); break;
-	}
+	// Print results
+	printf("Closest departure time is ");
+	printTime(departures[closest_time]);
+	printf(", arriving at ");
+	printTime(arrivals[closest_time]);
+	printf("\n");
 
 	return 0;
 }
