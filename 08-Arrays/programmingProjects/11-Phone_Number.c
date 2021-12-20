@@ -21,14 +21,28 @@
 // You may assume that any letters entered by the user are upper case.
 
 #include<stdio.h>
+#include<ctype.h>
+
+#define LENGTH 15
 
 int main(void)
 {
 	printf("Enter phone number: ");
+	fflush(stdout);
 
-	char ch;
-	while((ch = getchar()) != '\n') {
-		switch(ch) {
+	char phone_number[LENGTH];
+	for (int i = 0; i < LENGTH; ++i) {
+		phone_number[i] = toupper(getchar());
+		if (phone_number[i] == '\n')
+			break;
+	}
+
+	printf("To numeric form: ");
+
+	for (int i = 0; i < LENGTH; ++i) {
+		if (phone_number[i] == '\n')
+			break;
+		switch(phone_number[i]) {
 		case 'A': case 'B': case 'C':
 			printf("2");
 			break;
@@ -54,7 +68,7 @@ int main(void)
 			printf("9");
 			break;
 		default:
-			printf("%c", ch);
+			printf("%c", phone_number[i]);
 			break;
 		}
 	}
