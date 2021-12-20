@@ -15,9 +15,12 @@
 
 #include<stdio.h>
 
+#define LENGTH 20
+
 int main(void)
 {
-	char initial, temp;
+	char initial;
+	char surname[LENGTH];
 
 	// Get first initial
 	printf("Enter a first and last name: ");
@@ -28,12 +31,18 @@ int main(void)
 	while(getchar() != ' ')
 		;
 
-	// Print last name as received
-	while((temp = getchar()) != '\n') {
-		putchar(temp);
+	// Get last name
+	for (int i = 0; i < LENGTH; ++i) {
+		if ((surname[i] = getchar()) == '\n')
+			break;
 	}
 
-	// Print initial
+	// Print surname and initial
+	for (int i = 0; i < LENGTH; ++i) {
+		if ((surname[i] == '\n'))
+			break;
+		putchar(surname[i]);
+	}
 	printf(", %c.\n", initial);
 
 	return 0;
