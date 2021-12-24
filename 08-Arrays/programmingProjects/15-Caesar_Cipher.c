@@ -47,27 +47,14 @@ int main(void)
 	fflush(stdout);
 	scanf("%d", &shift_amount);
 
-	// Encrypt message
+	// Encrypt and print message
 	for (int i = 0; i < 80; ++i) {
 		if (user_message[i] == '\n')
 			break;
-		if (user_message[i] >= 'a' && user_message[i] <= 'z') {
-			user_message[i] += shift_amount;
-			if (user_message[i] > 'z')
-				user_message[i] -= 26;
-		}
-		if (user_message[i] >= 'A' && user_message[i] <= 'Z') {
-			user_message[i] += shift_amount;
-			if (user_message[i] > 'Z')
-				user_message[i] -= 26;
-		}
-	}
-
-	// Print encrypted message
-	printf("Encrypted message: ");
-	for (int i = 0; i < 80; ++i) {
-		if (user_message[i] == '\n')
-			break;
+		if (user_message[i] >= 'a' && user_message[i] <= 'z')
+			user_message[i] = (user_message[i] - 'a' + shift_amount) % 26 + 'a';
+		else if (user_message[i] >= 'A' && user_message[i] <= 'Z')
+			user_message[i] = (user_message[i] - 'A' + shift_amount) % 26 + 'A';
 		putchar(user_message[i]);
 	}
 	putchar('\n');
