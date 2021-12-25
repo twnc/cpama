@@ -28,5 +28,34 @@
 
 int main(void)
 {
+	bool anagram = true;
+	int letters[26] = {0};
+	char ch;
+
+	// Count first letters
+	printf("Enter first word: ");
+	while ((ch = tolower(getchar())) != '\n')
+		if (isalpha(ch))
+			letters[ch - 'a']++;
+
+	// Decrease second letters
+	printf("Enter second word: ");
+	while ((ch = tolower(getchar())) != '\n')
+		if (isalpha(ch))
+			letters[ch - 'a']--;
+
+	// Check for differences
+	for (int i = 0; i < 26; ++i)
+		if (letters[i] != 0) {
+			anagram = false;
+			break;
+		}
+
+	// Print results
+	if (anagram)
+		printf("The words are anagrams.\n");
+	else
+		printf("The words are not anagrams.\n");
+
 	return 0;
 }
