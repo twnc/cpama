@@ -16,11 +16,12 @@ int gcd(int m, int n)
 	}
 	common_divisor = smallest;
 
-	while ((biggest % smallest) != 0) {
+	while (common_divisor != 0) {
 		common_divisor = biggest % smallest;
 		biggest = smallest;
 		smallest = common_divisor;
 	}
+	common_divisor = biggest;
 
 	return common_divisor;
 }
@@ -33,7 +34,6 @@ int main(void)
 	fflush(stdout);
 	scanf("%d%d", &n1, &n2);
 
-	int result = gcd(n1, n2);
-	printf("The greatest common divisor of %d and %d is %d.\n", n1, n2, result);
+	printf("The greatest common divisor of %d and %d is %d.\n", n1, n2, gcd(n1, n2));
 	return 0;
 }
