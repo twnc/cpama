@@ -6,14 +6,14 @@
 
 bool is_leap_year(int year)
 {
-	if (year % 400 == 0)
-		return true;
-	else if (year % 100 == 0)
+	if (year % 4 != 0)
 		return false;
-	else if (year % 4 == 0)
-		return true;
-	else
+	if (year < 1752)
 		return false;
+	if (year % 100 == 0 && year % 400 !=0)
+		return false;
+
+	return true;
 }
 
 int day_of_year(int month, int day, int year)
