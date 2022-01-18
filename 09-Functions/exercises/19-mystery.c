@@ -19,3 +19,23 @@
 //   putchar('0');
 // putchar('1');
 // void pb(int n) prints out n as a binary
+#include<stdio.h>
+
+void pb(int n)
+{
+	if (n != 0) {
+		pb(n / 2);
+		putchar('0' + n % 2);
+	}
+}
+
+int main(void)
+{
+	int user_input;
+	printf("Please enter an integer:\n");
+	scanf("%d", &user_input);
+	printf("%d in binary is ", user_input);
+	pb(user_input);
+	putchar('\n');
+	return 0;
+}
