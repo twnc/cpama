@@ -11,18 +11,15 @@
 
 void selection_sort(int series[], int length) {
 	// Find biggest number
-	int biggest = series[0];
 	int biggest_index = 0;
 	for (int i = 0; i < length; ++i)
-		if (series[i] > biggest) {
-			biggest = series[i];
+		if (series[i] > series[biggest_index])
 			biggest_index = i;
-		}
 
 	// Swap biggest number with final number
-	int temp = series[length - 1];
+	int biggest = series[biggest_index];
+	series[biggest_index] = series[length - 1];
 	series[length-1] = biggest;
-	series[biggest_index] = temp;
 
 	// Call recursively excluding final number
 	if (length > 2)
