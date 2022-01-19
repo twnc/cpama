@@ -44,6 +44,10 @@
 #include<stdio.h>
 #include<stdbool.h>
 
+void create_magic_square(int n, int magic_square[n][n]);
+void print_magic_square(int n, int magic_square[n][n]);
+bool valid_magic_square(int n, int magic_square[n][n]);
+
 int main(void)
 {
 	int n;
@@ -54,12 +58,30 @@ int main(void)
 	fflush(stdout);
 	scanf("%d", &n);
 
+	// Generate magic square
 	int magic_square[n][n];
+	create_magic_square(n, magic_square);
+
+	// Print results
+	print_magic_square(n, magic_square);
+
+	// Check that it is a valid magic square
+	if (valid_magic_square(n, magic_square))
+		printf("This is a valid magic square.\n");
+	else
+		printf("This is NOT a valid magic square.\n");
+
+	return 0;
+}
+
+void create_magic_square(int n, int magic_square[n][n])
+{
 	// Initialise array to zero
 	for (int i = 0; i < n; ++i)
 		for (int j = 0; j < n; ++j)
 			magic_square[i][j] = 0;
 
+	// Calculate magic square contents
 	int x = 0, y = (n / 2);
 	for (int i = 1; i <= (n * n); ++i) {
 		magic_square[x][y] = i;
@@ -70,14 +92,19 @@ int main(void)
 			y = (y + n - 1) % n;
 		}
 	}
+}
 
-	// Print results
+void print_magic_square(int n, int magic_square[n][n])
+{
 	for (int i = 0; i < n; ++i) {
 		for (int j = 0; j < n; ++j)
 			printf("%5d", magic_square[i][j]);
 		printf("\n");
 	}
+}
 
+bool valid_magic_square(int n, int magic_square[n][n])
+{
 	// Check that it is a valid magic square
 	bool valid = true;
 	int sum_of_first_row = 0;
@@ -121,10 +148,5 @@ int main(void)
 	if (sum != sum_of_first_row)
 		valid = false;
 
-	if (valid)
-		printf("This is a valid magic square.\n");
-	else
-		printf("This is NOT a valid magic square.\n");
-
-	return 0;
+	return valid;
 }
