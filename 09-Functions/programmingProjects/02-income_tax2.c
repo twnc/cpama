@@ -18,27 +18,35 @@
 
 #include<stdio.h>
 
+float how_much_tax(float income);
+
 int main(void)
 {
-	float taxable_income, tax_due;
+	float taxable_income;
 
 	printf("Please enter your taxable income: $");
 	scanf("%f", &taxable_income);
 
-	if (taxable_income < 750.00f)
-		tax_due = taxable_income * 0.01f;
-	else if (taxable_income < 2250.00f)
-		tax_due = (taxable_income - 750.00f) * 0.02f + 7.50f;
-	else if (taxable_income < 3750.00f)
-		tax_due = (taxable_income - 2250.00f) * 0.03f + 37.50f;
-	else if (taxable_income < 5250.00f)
-		tax_due = (taxable_income - 3750.00f) * 0.04f + 82.50f;
-	else if (taxable_income < 7000.00f)
-		tax_due = (taxable_income - 5250.00f) * 0.05f + 142.50f;
-	else
-		tax_due = (taxable_income - 7000.00f) * 0.06f + 230.00f;
-
-	printf("Tax due: $%.2f\n", tax_due);
+	printf("Tax due: $%.2f\n", how_much_tax(taxable_income));
 
 	return 0;
+}
+
+float how_much_tax(float income)
+{
+	float tax_due;
+	if (income < 750.00f)
+		tax_due = income * 0.01f;
+	else if (income < 2250.00f)
+		tax_due = (income - 750.00f) * 0.02f + 7.50f;
+	else if (income < 3750.00f)
+		tax_due = (income - 2250.00f) * 0.03f + 37.50f;
+	else if (income < 5250.00f)
+		tax_due = (income - 3750.00f) * 0.04f + 82.50f;
+	else if (income < 7000.00f)
+		tax_due = (income - 5250.00f) * 0.05f + 142.50f;
+	else
+		tax_due = (income - 7000.00f) * 0.06f + 230.00f;
+
+	return tax_due;
 }
