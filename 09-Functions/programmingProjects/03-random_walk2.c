@@ -41,6 +41,9 @@
 
 #define UNOCCUPIED '.'
 
+void generate_random_walk(char walk[HEIGHT][WIDTH]);
+void print_array(char walk[HEIGHT][WIDTH]);
+
 int main(void)
 {
 	// Initialise matrix
@@ -50,25 +53,36 @@ int main(void)
 			matrix[i][j] = UNOCCUPIED;
 	}
 
+	// Generate random path through matrix
+	generate_random_walk(matrix);
+
+	// Print matrix
+	print_array(matrix);
+
+	return 0;
+}
+
+void generate_random_walk(char walk[HEIGHT][WIDTH])
+{
 	// Seed random function
 	srand((unsigned) time(NULL));
 
 	// Snake randomly through matrix
 	int x, y;
 	x = y = 0;
-	matrix[y][x] = 'A';
+	walk[y][x] = 'A';
 	for (char ch= 'B'; ch <= 'Z'; ++ch) {
 		int valid_directions[4] = {-1,-1,-1,-1};
 
 		// Check which directions are available
 		int free_sides = 0;
-		if ((y+1 <= MAX_Y) && (matrix[y+1][x] == UNOCCUPIED)) // Check up
+		if ((y+1 <= MAX_Y) && (walk[y+1][x] == UNOCCUPIED)) // Check up
 			valid_directions[free_sides++] = UP;
-		if ((y-1 >= MIN_Y) && (matrix[y-1][x] == UNOCCUPIED)) // Check down
+		if ((y-1 >= MIN_Y) && (walk[y-1][x] == UNOCCUPIED)) // Check down
 			valid_directions[free_sides++] = DOWN;
-		if ((x-1 >= MIN_X) && (matrix[y][x-1] == UNOCCUPIED)) // Check left
+		if ((x-1 >= MIN_X) && (walk[y][x-1] == UNOCCUPIED)) // Check left
 			valid_directions[free_sides++] = LEFT;
-		if ((x+1 <= MAX_X) && (matrix[y][x+1] == UNOCCUPIED)) // Check right
+		if ((x+1 <= MAX_X) && (walk[y][x+1] == UNOCCUPIED)) // Check right
 			valid_directions[free_sides++] = RIGHT;
 
 		// End loop if surrounded
@@ -93,16 +107,15 @@ int main(void)
 				++x;
 				break;
 		}
-		matrix[y][x] = ch;
+		walk[y][x] = ch;
 	}
-
-	// Print matrix
+}
+void print_array(char walk[HEIGHT][WIDTH])
+{
 	for (int i = 0; i < HEIGHT; ++i) {
-		printf("%c", matrix[i][0]);
+		printf("%c", walk[i][0]);
 		for (int j = 1; j < WIDTH; ++j)
-			printf(" %c", matrix[i][j]);
+			printf(" %c", walk[i][j]);
 		printf("\n");
 	}
-
-	return 0;
 }
