@@ -2,7 +2,7 @@
 // following functions:
 //
 // void read_word(int counts[26]);
-// void equal_array(int counts1[26], int counts2[26]);
+// bool equal_array(int counts1[26], int counts2[26]);
 //
 // main will call read_word twice, once for each of the two words entered by the
 // user. As it reads a word, read_word will use the letters in the word to
@@ -42,30 +42,27 @@
 #include<stdbool.h>
 #include<ctype.h>
 
+#define ALPHABET 26
+
+void read_word(int counts[ALPHABET]);
+bool equal_array(int counts1[ALPHABET], int counts2[ALPHABET]);
+
 int main(void)
 {
 	bool anagram = true;
-	int letters[26] = {0};
-	char ch;
+	int word1[ALPHABET] = {0};
+	int word2[ALPHABET] = {0};
 
-	// Count first letters
+	// Count letters in first word
 	printf("Enter first word: ");
-	while ((ch = tolower(getchar())) != '\n')
-		if (isalpha(ch))
-			letters[ch - 'a']++;
+	read_word(word1);
 
-	// Decrease second letters
+	// Count letters in second word
 	printf("Enter second word: ");
-	while ((ch = tolower(getchar())) != '\n')
-		if (isalpha(ch))
-			letters[ch - 'a']--;
+	read_word(word2);
 
 	// Check for differences
-	for (int i = 0; i < 26; ++i)
-		if (letters[i] != 0) {
-			anagram = false;
-			break;
-		}
+	anagram = equal_array(word1, word2);
 
 	// Print results
 	if (anagram)
@@ -74,4 +71,23 @@ int main(void)
 		printf("The words are not anagrams.\n");
 
 	return 0;
+}
+
+// Counts occurences of each letter in alphabet
+void read_word(int counts[ALPHABET])
+{
+	char ch;
+	while ((ch = tolower(getchar())) != '\n')
+		if (isalpha(ch))
+			counts[ch - 'a']++;
+}
+bool equal_array(int counts1[ALPHABET], int counts2[ALPHABET])
+{
+	bool equal = true;
+	for (int i = 0; i < ALPHABET; ++i)
+		if (counts1[i] != counts2[i]) {
+			equal = false;
+			break;
+		}
+	return equal;
 }
