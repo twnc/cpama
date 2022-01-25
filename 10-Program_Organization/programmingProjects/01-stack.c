@@ -16,13 +16,55 @@
 // stack_overflow is called, have the program print the message Stack overflow
 // and terminate immediately.
 
+#include<stdio.h>
 #include<stdbool.h>
+#include<stdlib.h>
 
-#define STACK_SIZE 100
+#define STACK_SIZE 3000
 
 // external variables
-int contents[STACK_SIZE];
+char contents[STACK_SIZE];
 int top = 0;
+int no_stack_underflows = 0;
+
+// function prototypes
+void make_empty(void);
+bool is_empty(void);
+bool is_full(void);
+void push(char i);
+char pop(void);
+void stack_underflow();
+void stack_overflow();
+
+int main(void)
+{
+	printf("Enter parentheses and/or braces: ");
+	fflush(stdout);
+	char ch;
+	bool error = false;
+
+	// Used EOF instead of \n so that I could use pipe other text files like
+	// code through this program
+	while ((ch = getchar()) != EOF) {
+		if (ch == '(' || ch == '{')
+			push(ch);
+		else if (ch == ')' || ch == '}') {
+			char left = pop();
+			if ((ch == ')' && left != '(') || (ch == '}' && left != '{'))
+				error = true;
+		}
+	}
+	if (top != 0)
+		error = true;
+
+
+	if (!error)
+		printf("Parentheses/braces are nested properly\n");
+	else
+		printf("Parentheses/braces are NOT nested properly\n");
+
+	return 0;
+}
 
 void make_empty(void)
 {
@@ -39,7 +81,7 @@ bool is_full(void)
 	return top == STACK_SIZE;
 }
 
-void push(int i)
+void push(char i)
 {
 	if (is_full())
 		stack_overflow();
@@ -47,10 +89,25 @@ void push(int i)
 		contents[top++] = i;
 }
 
-int pop(void)
+char pop(void)
 {
-	if (is_empty())
+	if (is_empty()) {
 		stack_underflow();
+		// Any non-matching brace/parameter returned will be detected as an error
+		return '!';
+	}
 	else
 		return contents[--top];
+
+}
+
+void stack_underflow()
+{
+	++no_stack_underflows;
+}
+
+void stack_overflow()
+{
+	printf("Stack overflow\n");
+	exit(EXIT_FAILURE);
 }
